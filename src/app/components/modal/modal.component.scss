@@ -1,0 +1,168 @@
+@import "../../../styles/vars.scss";
+
+.modal {
+  position: fixed;
+  z-index: 501;
+  background: rgba(235, 242, 242, 0.8);
+  color: $black-color;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  width: auto;
+  transition: all 0.5s;
+
+  .actions {
+    height: 50px;
+    background-color: $white-color;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #dce8e8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    input {
+      width: 80%;
+      border: none;
+      font-size: $font-size-md;
+      padding-left: 10px;
+    }
+
+    input:focus-visible {
+      outline: none;
+    }
+
+    ::placeholder {
+      font-size: 13px;
+      font-style: italic;
+      color: $black-color;
+    }
+
+    button {
+      width: 25px;
+      height: 25px;
+      border: none;
+      background: none;
+      margin-right: 10px;
+
+      .icon-time {
+        .st0 {
+          fill: none;
+          stroke: #000;
+          stroke-width: 3;
+          stroke-miterlimit: 10;
+        }
+      }
+    }
+  }
+}
+
+.modal .modal_body ul {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.modal .modal_body ul::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+  background: $white-color;
+}
+
+.modal .modal_body ul::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,.3);
+}
+
+
+.modal .modal_body ul li {
+  background: #fff;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  border-bottom: 1px solid #dce8e8;
+  cursor: pointer;
+}
+
+.modal .modal_body ul li.dependency-group-title {
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  cursor: default;
+}
+
+.modal .modal_body ul li.dependency-group-title span {
+  display: inline-block;
+  margin: 12px;
+  padding: 4px 9px 3px;
+  background: $main-color;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  color: $white-color;
+}
+
+.modal .modal_body ul li a.dependency {
+  display: block;
+  position: relative;
+  color: $black-color;
+  text-decoration: none;
+  padding: 13px 10px;
+  line-height: 2.4rem;
+
+  span {
+    font-size: 1.7rem;
+    font-weight: 600;
+  }
+  p {
+    display: block;
+    cursor: pointer;
+    font-size: $font-size-md;
+  }
+}
+
+.modal .modal_body ul li a.dependency :nth-child(3) {
+  color: red;
+  font-weight: normal;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(235,242,242,.8);
+}
+@media screen and (min-width: 768px) {
+  .modal {
+    position: fixed;
+    z-index: 501;
+    width: 800px;
+    margin-left: -400px;
+    left: 50%;
+    top: 40px;
+    bottom: 40px;
+    height: 90vh;
+  }
+  .modal .actions input {
+    width: 100%;
+  }
+  .modal .actions button {
+    display: none;
+  }
+  .modal .modal_body ul li a:hover {
+    color: $white-color;
+    background: $main-color;
+  }
+}

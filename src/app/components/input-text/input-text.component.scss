@@ -1,0 +1,68 @@
+@import "../../../styles/vars.scss";
+
+.metadata-form--input {
+  margin-top: 3px;
+  margin-bottom: 23px;
+  &.disabled {
+    input {
+      border-bottom: 3px solid $disabled-color;
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  input {
+    width: 100%;
+    height: 30px;
+    border: none;
+    border-bottom: 3px solid $black-color;
+    font-size: $font-size-md;
+  }
+
+  input:focus {
+    border-color: $main-color;
+  }
+
+  input:focus-visible {
+    outline: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .metadata-form--input {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    input {
+      width: 75%;
+      flex-direction: end;
+    }
+
+    label {
+      text-align: right;
+      flex: 110px 0;
+      width: 25%;
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .metadata-form--input {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+.metadata-form--input input {
+    width: 75%;
+    flex-direction: end;
+}
+.metadata-form--input label {
+    text-align: right;
+    flex: 110px 0;
+    width: 25%;
+}
+}

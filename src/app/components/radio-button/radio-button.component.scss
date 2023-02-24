@@ -1,0 +1,60 @@
+@import '../../../styles/vars.scss';
+
+.radio-button {
+  position: relative;
+  display: flex;
+  width: auto;
+  height: 25px;
+  &.disabled {
+    color: $disabled-color;
+
+    input {
+      cursor: default;
+    }
+    .checkmark {
+      border: 2px solid $disabled-color;
+    }
+    .radio-label {
+      cursor: default;
+    }
+  }
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .checkmark {
+    position: absolute;
+    top: 1px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 2px solid $black-color;
+  }
+
+  input:checked ~ .checkmark {
+    background-color: $main-color;
+    border: none;
+  }
+
+  input:checked ~ .radio-label {
+    color: $main-color;
+  }
+
+  .radio-label {
+    font-size: $font-size-md;
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    padding-right: 30px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
