@@ -1,17 +1,38 @@
-import { Component, Input } from '@angular/core';
+import { Component, forwardRef, Input } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-input-text',
   templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss']
+  styleUrls: ['./input-text.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputTextComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputTextComponent {
+export class InputTextComponent implements ControlValueAccessor {
+  value = '';
+  disabled = false;
 
-  @Input() inputLabel: string = 'defaultLabel';
-  @Input() inputName: string = '';
-  @Input() inputId: string = '';
-  @Input() inputValue: string = '';
-  @Input() inputPlaceholder: string = '';
-  @Input() inputDisabled: boolean = false;
+  @Input() label?: string;
+  @Input() placeholder: string = '';
 
+  onChangeCb?: (value: string) => void;
+  onTouchedCb?: () => void;
+
+  writeValue(value: string): void {
+    this.value = value;
+  }
+  registerOnChange(fn: any): void {
+    this.onChangeCb = fn;
+  }
+  registerOnTouched(fn: any): void {
+    this.onTouchedCb = fn;
+  }
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
 }

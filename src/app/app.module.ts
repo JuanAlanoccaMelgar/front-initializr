@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
@@ -11,6 +11,9 @@ import { InputTextComponent } from './components/input-text/input-text.component
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalItemComponent } from './components/modal-item/modal-item.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
+import { ApiGateway } from './gateway/api.gateway';
+import { InitializrService } from './services/initializr.service';
 
 @NgModule({
   declarations: [
@@ -19,15 +22,21 @@ import { LoadingComponent } from './components/loading/loading.component';
     InputTextComponent,
     ModalComponent,
     ModalItemComponent,
-    LoadingComponent
+    LoadingComponent,
+    RadioGroupButtonComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: ApiGateway, useClass: InitializrService,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

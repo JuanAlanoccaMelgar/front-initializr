@@ -5,10 +5,7 @@ import { Dependency } from '../model/dependency';
   providedIn: 'root'
 })
 export class UtilService {
-
   modalOpenEvent$ = new EventEmitter<string>();
   modalCloseEvent$ = new EventEmitter();
   modalSelectDependencyEvent$ = new EventEmitter<Dependency>();
-
-  constructor() { }
 }

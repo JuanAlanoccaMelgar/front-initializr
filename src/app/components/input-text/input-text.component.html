@@ -1,4 +1,8 @@
-<div class="metadata-form--input" [class.disabled]="inputDisabled">
-  <label [for]="inputId">{{inputLabel}}</label>
-  <input type="text" [name]="inputName" [id]="inputId" [value]="inputValue" [placeholder]="inputPlaceholder" [disabled]="inputDisabled">
+<div class="metadata-form--input">
+  <label>{{ label }}</label>
+  <input 
+    type="text" 
+    [value]="value" 
+    [placeholder]="placeholder" 
+    [disabled]="disabled">
 </div>

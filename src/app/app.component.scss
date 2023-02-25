@@ -1,4 +1,4 @@
-@import "../styles/vars.scss";
+@import "vars";
 
 header {
   border-bottom: 1px solid #dce8e8;
@@ -216,7 +216,8 @@ header {
   position: fixed;
   bottom: 0;
   z-index: 3;
-
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   button {
     width: 220px;
     height: 40px;
@@ -231,6 +232,10 @@ header {
     background-color: black;
     color: white;
   }
+}
+
+button {
+  transition: all 0.35s;
 }
 
 @media screen and (min-width: 425px) {
@@ -311,7 +316,7 @@ header {
     min-width: 1000px;
     max-width: 1270px;
     margin: 0 auto;
-    overflow: auto;
+    // overflow: auto;
   }
   .header-container {
     width: 100%;
@@ -378,29 +383,14 @@ header {
     height: 70vh;
   }
 
-  ::-webkit-scrollbar {
-    width: 6px;
-    background: $white-color;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
-  }
-  ::-webkit-scrollbar-corner {
-    background-color: black;
-  }
-
   .project--container,
   .build--container,
   .language--container {
     min-width: 170px;
     max-width: 175px;
-  }
-
-  .project--container,
-  .build--container,
-  .language--container {
     margin-top: 30px;
   }
+
   .packaging--container,
   .java--container {
     display: flex;

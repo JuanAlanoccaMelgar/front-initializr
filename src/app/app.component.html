@@ -2,180 +2,105 @@
   <app-loading></app-loading>
 </div>
 <div class="full-container" *ngIf="!loading">
-  <form (ngSubmit)="onGenerateProject()" #myForm="ngForm">
+  <form (ngSubmit)="onGenerateProject()">
     <header>
       <div class="header-container">
           <div class="header--logo">
-              <h1><a href="/"><img src="../assets/img/initializr_blue_image.png" alt=""></a></h1>
+              <h1><a href="/"><img src="assets/img/initializr_blue_image.png" alt=""></a></h1>
           </div>
       </div>
     </header>
-    <main class="main-container">
+    <main class="main-container" [formGroup]="form">
       <section class="main--metadata-container">
         <div class="main-metadata--input-group">
           <div class="project--container sub-container">
             <h2 class="sub-section--title">Project</h2>
-            <div class="project--radioGroup">
-              <app-radio-button
-                *ngFor="let item of configs.projects"
-                [radioText]="item.name"
-                radioName="project"
-                [radioId]="item.id"
-                [radioValue]="item.id"
-                [radioChecked]="item.checked"
-                [(ngModel)]="form.project" name="project" ngDefaultControl
-                (change)="radioProjectChange($event)"
-                >
-              </app-radio-button>
-            </div>
+            <app-radio-group-button
+              ngClass="project--radioGroup"
+              formControlName="project" 
+              [radioButtons]="projectButtons">
+            </app-radio-group-button>
           </div>
           <div class="build--container sub-container">
             <h2 class="sub-section--title">Build</h2>
-            <div class="project--radioGroup">
-              <app-radio-button
-                *ngFor="let item of builds"
-                [radioText]="item.name"
-                radioName="build"
-                [radioId]="item.id"
-                [radioValue]="item.id"
-                [radioChecked]="item.checked"
-                [radioDisabled]="item.disabled"
-                [(ngModel)]="form.type" name="build" ngDefaultControl
-                >
-              </app-radio-button>
-            </div>
+            <app-radio-group-button
+              ngClass="project--radioGroup"
+              formControlName="type"
+              [radioButtons]="buildButtons"
+              >
+            </app-radio-group-button>
           </div>
           <div class="language--container sub-container">
             <h2 class="sub-section--title">Language</h2>
-            <div class="language--radioGroup">
-              <app-radio-button
-                *ngFor="let item of languages"
-                [radioText]="item.name"
-                radioName="language"
-                [radioId]="item.id"
-                [radioValue]="item.id"
-                [radioChecked]="item.checked"
-                [radioDisabled]="item.disabled"
-                [(ngModel)]="form.language" name="language" ngDefaultControl
-                >
-              </app-radio-button>
-            </div>
+            <app-radio-group-button 
+              ngClass="language--radioGroup"
+              formControlName="language"
+              [radioButtons]="languageButtons">
+            </app-radio-group-button>
           </div>
         </div>
         <div class="boot--container sub-container">
           <h2 class="sub-section--title">Spring Boot</h2>
-          <div class="boot--radioGroup">
-            <app-radio-button
-              *ngFor="let item of bootVersions"
-              [radioText]="item.name"
-              radioName="bootVersion"
-              [radioId]="item.id"
-              [radioValue]="item.id"
-              [radioChecked]="item.checked"
-              [radioDisabled]="item.disabled"
-              [(ngModel)]="form.bootVersion" name="bootVersion" ngDefaultControl
-              >
-            </app-radio-button>
-          </div>
+          <app-radio-group-button
+            ngClass="boot--radioGroup" 
+            formControlName="bootVersion"
+            [radioButtons]="bootVersionButtons">
+          </app-radio-group-button>
         </div>
         <div class="boot--container sub-container">
           <h2 class="sub-section--title">Domains</h2>
-          <div class="boot--radioGroup">
-            <app-radio-button
-              *ngFor="let item of domains"
-              [radioText]="item.name"
-              radioName="domain"
-              [radioId]="item.id"
-              [radioValue]="item.id"
-              [radioChecked]="item.checked"
-              [radioDisabled]="item.disabled"
-              (change)="radioDomainsChange($event)"
-              [(ngModel)]="form.domain" name="domain" ngDefaultControl
-              (ngModelChange)="radioDomainChangePackage($event)"
-              >
-            </app-radio-button>
-          </div>
+          <app-radio-group-button 
+            ngClass="boot--radioGroup"
+            formControlName="domain"
+            [radioButtons]="domainsButtons">
+          </app-radio-group-button>
         </div>
         <div class="project-metadata--container sub-container">
           <div class="metadata--container">
             <h2 class="sub-section--title">Project Metadata</h2>
             <div class="metadata-form">
               <app-input-text
-                inputLabel="Group"
-                inputName="group"
-                inputId="group"
-                [inputValue]="form.groupId"
-                [(ngModel)]="form.groupId"
-                name="group" ngDefaultControl
-                [inputDisabled]="form.project === 'ginni'"
-                (ngModelChange)="inputTextGroupChange($event)">
+                label="Group"
+                formControlName="groupId">
               </app-input-text>
               <app-input-text
-                inputLabel="Artifact"
-                inputName="artifact"
-                inputId="artifact"
-                [inputValue]="form.artifactId"
-                [(ngModel)]="form.artifactId"
-                name="artifact" ngDefaultControl
-                (ngModelChange)="inputTextArtifactChange($event)"
+                label="Artifact"
+                formControlName="artifactId"
                 >
               </app-input-text>
               <app-input-text
-                inputLabel="Name"
-                inputName="name"
-                inputId="name"
-                [inputValue]="form.name"
-                [(ngModel)]="form.name"
-                name="name" ngDefaultControl>
+                label="Name"
+                formControlName="name">
               </app-input-text>
               <app-input-text
-                inputLabel="Description"
-                inputName="description"
-                inputId="description"
-                inputValue="Demo project for Spring Boot"
-                [(ngModel)]="form.description"
-                name="description" ngDefaultControl>
+                label="Description"
+                formControlName="description"
+                >
               </app-input-text>
               <app-input-text
-                inputLabel="Package name"
-                inputName="packageName"
-                inputId="packageName"
-                [inputValue]="form.packageName"
-                [(ngModel)]="form.packageName"
-                [inputDisabled]="form.project === 'ginni'"
-                name="packageName" ngDefaultControl>
+                label="Package name"
+                formControlName="packageName"
+                >
               </app-input-text>
             </div>
           </div>
           <div class="packaging--container">
             <p class="metadata--sub-title">Packaging</p>
             <div class="packaging--radioGroup">
-              <app-radio-button
-                *ngFor="let item of packagings"
-                [radioText]="item.name"
-                radioName="packaging"
-                [radioId]="item.id"
-                [radioValue]="item.id"
-                [radioChecked]="item.checked"
-                [radioDisabled]="item.disabled"
-                [(ngModel)]="form.packaging" name="packaging" ngDefaultControl>
-              </app-radio-button>
+              <app-radio-group-button
+                ngClass="packaging--radioGroup"
+                formControlName="packaging" 
+                [radioButtons]="packagingButtons">
+              </app-radio-group-button>
             </div>
           </div>
           <div class="java--container">
             <p class="metadata--sub-title">Java</p>
-            <div class="java--radioGroup">
-              <app-radio-button
-                *ngFor="let item of javaVersions"
-                [radioText]="item.name"
-                radioName="javaVersion"
-                [radioId]="item.id"
-                [radioValue]="item.id"
-                [radioChecked]="item.checked"
-                [radioDisabled]="item.disabled"
-                [(ngModel)]="form.javaVersion" name="javaVersion" ngDefaultControl>
-              </app-radio-button>
-            </div>
+            <app-radio-group-button 
+              ngClass="java--radioGroup"
+              formControlName="javaVersion"
+              [radioButtons]="javaVersionButtons">
+            </app-radio-group-button>
           </div>
         </div>
       </section>
