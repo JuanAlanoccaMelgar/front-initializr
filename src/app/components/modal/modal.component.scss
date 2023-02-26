@@ -118,6 +118,7 @@
   text-decoration: none;
   padding: 13px 10px;
   line-height: 2.4rem;
+  transition: all 0.25s;
 
   span {
     font-size: 1.7rem;
@@ -125,7 +126,7 @@
   }
   p {
     display: block;
-    cursor: pointer;
+    // cursor: pointer;
     font-size: $font-size-md;
   }
 }
@@ -133,6 +134,19 @@
 .modal .modal_body ul li a.dependency :nth-child(3) {
   color: red;
   font-weight: normal;
+}
+
+.modal .modal_body .dependency-item.disabled {
+  cursor: no-drop;
+  opacity: 0.5;
+  user-select: none;
+}
+
+.chip-group {
+  background-color: $main-color;
+  margin-left: 10px;
+  padding: 4px;
+  border-radius: 3px;
 }
 
 .overlay {
@@ -164,5 +178,9 @@
   .modal .modal_body ul li a:hover {
     color: $white-color;
     background: $main-color;
+    .chip-group {
+      background-color: $white-color;
+      color: #000;
+    }
   }
 }

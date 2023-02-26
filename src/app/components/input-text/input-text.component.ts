@@ -16,9 +16,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputTextComponent implements ControlValueAccessor {
   value = '';
   disabled = false;
-
-  @Input() label?: string;
-  @Input() placeholder: string = '';
+  
+  @Input()
+  label?: string;
+  
+  @Input()
+  placeholder: string = '';
 
   onChangeCb?: (value: string) => void;
   onTouchedCb?: () => void;
@@ -34,5 +37,8 @@ export class InputTextComponent implements ControlValueAccessor {
   }
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+  }
+  keypress(event: any) {
+    setTimeout(() => this.onChangeCb?.(event.target.value), 0);
   }
 }

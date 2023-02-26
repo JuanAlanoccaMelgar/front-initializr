@@ -1,21 +1,29 @@
 <div class="modal">
   <div class="actions">
-    <input type="text" placeholder="Web, Security, JPA, Actuator, Devtools...">
+    <input [(ngModel)]="filterValue" type="text" placeholder="Web, Security, JPA, Actuator, Devtools...">
     <button (click)="emitCloseModal()">
       <svg aria-hidden="true" focusable="false" data-icon="time" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.6 14.6" class="icon-time"><title>close</title><line class="st0" x1="1.5" y1="1.5" x2="13.1" y2="13.1"></line><line class="st0" x1="13.1" y1="1.5" x2="1.5" y2="13.1"></line></svg>
     </button>
   </div>
   <div class="modal_body">
     <ul class="dependency-group">
-      <div [hidden]="item.hidden" *ngFor="let item of dependencies">
-        <li class="dependency-group-title">
-          <span>{{item.name}}</span>
+      <div [hidden]="dependency.hidden" *ngFor="let dependency of dependencies | rangeVersionDepenedency: bootVersion: filterValue">
+        <li class="dependency-group-title" [hidden]="filterValue">
+          <span>{{dependency.name}}</span>
         </li>
-        <li [hidden]="dep.hidden" class="dependency-item" *ngFor="let dep of item.content"  (click)="selectDependency(dep)">
+        <li 
+          *ngFor="let dep of dependency.content"
+          class="dependency-item"
+          [ngClass]="{disabled: dep.versionRequired}" 
+          [hidden]="dep.hidden" 
+          (click)=" dep.versionRequired ? null : selectDependency(dep)">
           <a class="dependency">
-            <span class="dependency-title">{{dep.name}}</span>
+            <div class="dependency-wrapper">
+              <span class="dependency-title">{{dep.name}}</span>
+              <span class="chip-group" [hidden]="!filterValue">{{ dependency.name }}</span>
+            </div>
             <p class="dependency-description">{{dep.description}}</p>
-            <span *ngIf="dep.versionRange">Requires Spring Boot {{formatVersionRange(dep.versionRange)}}</span>
+            <span *ngIf="dep.versionRequired ">Requires Spring Boot {{ dep.versionRequired }}</span>
           </a>
         </li>
       </div>

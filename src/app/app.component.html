@@ -119,13 +119,16 @@
           </div>
           <div *ngIf="selectedDependencies.length > 0">
             <ul>
-              <li *ngFor="let item of selectedDependencies; index as i">
+              <li *ngFor="let item of selectedDependencies | rangeVersionContent: form.get('bootVersion')?.value; index as i">
                 <div class="dependency-info-container">
                   <div class="dependency-group-title">
                     <span class="dependency-title">{{item.name}}</span>
                     <span class="dependency-group-badge">{{item.group}}</span>
                   </div>
-                  <p class="dependency-description">{{item.description}}</p>
+                  <p *ngIf="!item.versionRequired else requiredVersion" class="dependency-description">{{item.description}}</p>
+                  <ng-template #requiredVersion>
+                    <p class="dependency-require">Requires Spring Boot {{ item.versionRequired }}</p>
+                  </ng-template>
                 </div>
                 <div class="dependency-actions">
                   <button type="button" (click)="onRemoveDependency(item, i)">
@@ -146,5 +149,8 @@
   </form>
 </div>
 <div *ngIf="modalSwitch">
-  <app-modal [dependencies]="listDependencies"></app-modal>
+  <app-modal 
+    [(dependencies)]="listDependencies" 
+    [bootVersion]="form.get('bootVersion')?.value">
+  </app-modal>
 </div>

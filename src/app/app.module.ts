@@ -14,6 +14,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { RadioGroupButtonComponent } from './components/radio-group-button/radio-group-button.component';
 import { ApiGateway } from './gateway/api.gateway';
 import { InitializrService } from './services/initializr.service';
+import { RangeVersionDependencyPipe } from './pipes/range-version-dependency.pipe';
+import { RangeVersionContentPipe } from './pipes/range-version-content.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { InitializrService } from './services/initializr.service';
     ModalComponent,
     ModalItemComponent,
     LoadingComponent,
-    RadioGroupButtonComponent
+    RadioGroupButtonComponent,
+    RangeVersionDependencyPipe,
+    RangeVersionContentPipe
   ],
   imports: [
     BrowserModule,

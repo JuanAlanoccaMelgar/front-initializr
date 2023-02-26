@@ -48,7 +48,6 @@ export class RadioButtonComponent implements ControlValueAccessor {
    this.onTouchedCb = fn;
   }
   setDisabledState(isDisabled: boolean) {
-    console.log(isDisabled);
     this.radioButton.disabled = isDisabled;
   }
   clickButton() {

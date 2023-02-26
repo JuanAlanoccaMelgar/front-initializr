@@ -1,8 +1,9 @@
 <div class="metadata-form--input">
   <label>{{ label }}</label>
-  <input 
-    type="text" 
-    [value]="value" 
+  <input
+    [value]="value"
+    type="text"
     [placeholder]="placeholder" 
-    [disabled]="disabled">
+    [disabled]="disabled"
+    (keypress)="keypress($event)">
 </div>

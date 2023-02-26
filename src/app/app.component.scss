@@ -137,6 +137,10 @@ header {
       &.dependency-description {
         font-style: normal;
       }
+      &.dependency-require {
+        color: red;
+        margin-bottom: 5px;
+      }
     }
 
     div ul li {
