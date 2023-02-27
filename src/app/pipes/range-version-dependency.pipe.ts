@@ -18,7 +18,7 @@ export class RangeVersionDependencyPipe implements PipeTransform {
           const FILTER = filter.toLowerCase();
           description = content.description.toLowerCase().includes(FILTER);
           name = content.name.toLowerCase().includes(FILTER);
-          hidden = !name ?? !description;
+          hidden = name ? false : description ? false : true;
         } else {
           hidden = content.hidden;
         }
